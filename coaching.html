@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EduManage - coaching institutes ke liye all-in-one management toolkit." />
+  <meta name="theme-color" content="#1d4ed8" />
+  <title>EduManage - All-in-One Coaching Toolkit</title>
+  <style>
+    :root {
+      --primary: #1d4ed8;
+      --text: #0f172a;
+      --muted: #475569;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Devanagari", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; line-height: 1.5; }
+    header, section, footer { padding: 1rem clamp(1rem, 4vw, 3rem); }
+    .topbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .5rem; }
+    nav { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    nav a { color: var(--text); }
+    .hero { background: linear-gradient(135deg, #1e3a8a, #1d4ed8); color: #fff; padding: 3rem clamp(1rem, 4vw, 3rem); }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin: 0 0 .5rem; }
+    .btn {
+      display: inline-block; padding: .6rem 1.1rem; border-radius: 8px;
+      border: 1px solid transparent; font-weight: 600; cursor: pointer;
+      text-decoration: none; font-size: 1rem; font-family: inherit;
+    }
+    .btn-primary { background: #fff; color: var(--primary); }
+    .btn-outline { background: transparent; color: #fff; border-color: #fff; }
+    .btn-lang { background: #fff; border-color: #cbd5e1; color: var(--text); }
+    .btn:focus-visible, input:focus-visible { outline: 3px solid #93c5fd; outline-offset: 2px; }
+    .grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem; }
+    .card h3 { margin-top: 0; }
+    label { display: block; font-weight: 600; margin: .6rem 0 .2rem; }
+    input {
+      width: 100%; padding: .55rem; border: 1px solid #cbd5e1;
+      border-radius: 8px; font-size: 1rem; font-family: inherit;
+    }
+    .result { font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-top: .8rem; }
+    .error { color: #b91c1c; font-size: .9rem; margin-top: .6rem; }
+    .muted { color: var(--muted); }
+    .small { font-size: .85rem; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; background: var(--card); min-width: 560px; }
+    th, td { text-align: left; padding: .55rem; border-bottom: 1px solid var(--border); }
+    th { background: #f1f5f9; }
+    .note { margin-top: .6rem; }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <strong>EduManage</strong>
+    <nav>
+      <a href="#features" data-i18n="nav_features">Features</a>
+      <a href="#tools" data-i18n="nav_tools">Free Tools</a>
+      <a href="#demo" data-i18n="nav_demo">Demo</a>
+      <button class="btn btn-lang" id="langBtn" aria-label="Switch language">English</button>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h1>EduManage</h1>
+    <p style="font-size:1.15rem" data-i18n="tagline">Coaching institute ka sara kaam, ek jagah</p>
+    <p style="opacity:.9">All-in-One Coaching Toolkit</p>
+    <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+      <a class="btn btn-primary" href="#features" data-i18n="cta">Free mein shuru karein</a>
+      <a class="btn btn-outline" href="#features" data-i18n="login">Login</a>
+    </div>
+    <p class="small" style="margin-top:1rem;opacity:.9" data-i18n="setup_note">
+      Login aur database abhi connect nahi hain. Ye demo landing page hai.
+    </p>
+  </div>
+
+  <section id="tools">
+    <h2 data-i18n="tools_title">Free Tools</h2>
+    <div class="grid">
+
+      <div class="card">
+        <h3 data-i18n="pct_title">Percentage calculator</h3>
+        <label for="obtained" data-i18n="obtained">Prapt number</label>
+        <input id="obtained" type="number" min="0" inputmode="decimal" />
+        <label for="total" data-i18n="total">Kul number</label>
+        <input id="total" type="number" min="1" inputmode="decimal" />
+        <div id="pctResult" class="result" aria-live="polite"></div>
+        <div id="pctError" class="error" role="alert"></div>
+      </div>
+
+      <div class="card">
+        <h3 data-i18n="att_title">Attendance calculator</h3>
+        <label for="present" data-i18n="present">Present din</label>
+        <input id="present" type="number" min="0" inputmode="numeric" />
+        <label for="late" data-i18n="late">Late din</label>
+        <input id="late" type="number" min="0" inputmode="numeric" />
+        <label for="totalDays" data-i18n="totalDays">Kul din</label>
+        <input id="totalDays" type="number" min="1" inputmode="numeric" />
+        <div class="small muted note" data-i18n="att_rule">Late din ko present gina jaata hai.</div>
+        <div id="attResult" class="result" aria-live="polite"></div>
+        <div id="attError" class="error" role="alert"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="demo">
+    <h2 data-i18n="demo_title">Demo (fake data)</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th data-i18n="col_name">Naam</th>
+            <th data-i18n="col_class">Class</th>
+            <th data-i18n="col_avg">Average</th>
+            <th data-i18n="col_grade">Grade</th>
+            <th data-i18n="col_rank">Rank</th>
+            <th data-i18n="col_fee">Fee balance</th>
+          </tr>
+        </thead>
+        <tbody id="demoBody"></tbody>
+      </table>
+    </div>
+    <p class="small muted" data-i18n="demo_note">Sab data fictional hai. Ye sirf demo ke liye hai.</p>
+  </section>
+
+  <section id="features">
+    <h2 data-i18n="features_title">Features</h2>
+    <div class="grid">
+      <div class="card"><h3 data-i18n="f_students">Students</h3><p class="muted small" data-i18n="f_students_d">Student records aur profile.</p></div>
+      <div class="card"><h3 data-i18n="f_fees">Fees (₹)</h3><p class="muted small" data-i18n="f_fees_d">Fee, payment aur balance ka hisaab.</p></div>
+      <div class="card"><h3 data-i18n="f_att">Attendance</h3><p class="muted small" data-i18n="f_att_d">Daily attendance aur monthly report.</p></div>
+      <div class="card"><h3 data-i18n="f_exams">Exams & Ranks</h3><p class="muted small" data-i18n="f_exams_d">Marks, grade aur rank.</p></div>
+      <div class="card"><h3 data-i18n="f_materials">Study Materials</h3><p class="muted small" data-i18n="f_materials_d">Class-wise PDF aur notes.</p></div>
+      <div class="card"><h3 data-i18n="f_parent">Parent Portal</h3><p class="muted small" data-i18n="f_parent_d">Parents ko apne bachche ki jaankari.</p></div>
+    </div>
+  </section>
+
+  <footer class="muted small">
+    © EduManage · <span data-i18n="footer">Privacy Policy, Terms aur data deletion pages next phase mein.</span>
+  </footer>
+
+<script>
+  // ---------- Pure calculation functions ----------
+  function percentage(obtained, total) {
+    if (total <= 0 || obtained < 0 || obtained > total) {
+      throw new RangeError("invalid");
+    }
+    return Math.round((obtained / total) * 10000) / 100;
+  }
+
+  function attendancePercentage(present, late, totalDays) {
+    if (totalDays <= 0 || present < 0 || late < 0 || present + late > totalDays) {
+      throw new RangeError("invalid");
+    }
+    return Math.round(((present + late) / totalDays) * 10000) / 100;
+  }
+
+  function grade(pct) {
+    if (pct >= 91) return "A1";
+    if (pct >= 81) return "A2";
+    if (pct >= 71) return "B1";
+    if (pct >= 61) return "B2";
+    if (pct >= 51) return "C1";
+    if (pct >= 41) return "C2";
+    return "D";
+  }
+
+  // 1224 method: barabar score = same rank, agla rank skip
+  function rankScores(scores) {
+    return scores.map(s => 1 + scores.filter(o => o > s).length);
+  }
+
+  function feeBalance(monthlyFee, discount, paid) {
+    const due = Math.max(0, monthlyFee - discount);
+    return Math.max(0, due - paid);
+  }
+
+  // ---------- Translations ----------
+  const T = {
+    hi: {
+      nav_features: "Features", nav_tools: "Free Tools", nav_demo: "Demo",
+      tagline: "Coaching institute ka sara kaam, ek jagah",
+      cta: "Free mein shuru karein", login: "Login",
+      setup_note: "Login aur database abhi connect nahi hain. Ye demo landing page hai.",
+      tools_title: "Free Tools",
+      pct_title: "Percentage calculator", obtained: "Prapt number", total: "Kul number",
+      att_title: "Attendance calculator", present: "Present din", late: "Late din", totalDays: "Kul din",
+      att_rule: "Late din ko present gina jaata hai.",
+      demo_title: "Demo (fake data)", col_name: "Naam", col_class: "Class", col_avg: "Average",
+      col_grade: "Grade", col_rank: "Rank", col_fee: "Fee balance",
+      demo_note: "Sab data fictional hai. Ye sirf demo ke liye hai.",
+      features_title: "Features",
+      f_students: "Students", f_students_d: "Student records aur profile.",
+      f_fees: "Fees (₹)", f_fees_d: "Fee, payment aur balance ka hisaab.",
+      f_att: "Attendance", f_att_d: "Daily attendance aur monthly report.",
+      f_exams: "Exams & Ranks", f_exams_d: "Marks, grade aur rank.",
+      f_materials: "Study Materials", f_materials_d: "Class-wise PDF aur notes.",
+      f_parent: "Parent Portal", f_parent_d: "Parents ko apne bachche ki jaankari.",
+      footer: "Privacy Policy, Terms aur data deletion pages next phase mein.",
+      err: "Input galat hai, check karein.", result: "Parinaam",
+      langBtn: "English"
+    },
+    en: {
+      nav_features: "Features", nav_tools: "Free Tools", nav_demo: "Demo",
+      tagline: "Run your entire coaching institute in one place",
+      cta: "Start free", login: "Login",
+      setup_note: "Login and database are not connected yet. This is a demo landing page.",
+      tools_title: "Free Tools",
+      pct_title: "Percentage calculator", obtained: "Marks obtained", total: "Total marks",
+      att_title: "Attendance calculator", present: "Present days", late: "Late days", totalDays: "Total days",
+      att_rule: "Late days are counted as present.",
+      demo_title: "Demo (fake data)", col_name: "Name", col_class: "Class", col_avg: "Average",
+      col_grade: "Grade", col_rank: "Rank", col_fee: "Fee balance",
+      demo_note: "All data is fictional. For demo only.",
+      features_title: "Features",
+      f_students: "Students", f_students_d: "Student records and profiles.",
+      f_fees: "Fees (₹)", f_fees_d: "Fees, payments and balance tracking.",
+      f_att: "Attendance", f_att_d: "Daily attendance and monthly reports.",
+      f_exams: "Exams & Ranks", f_exams_d: "Marks, grades and ranks.",
+      f_materials: "Study Materials", f_materials_d: "Class-wise PDFs and notes.",
+      f_parent: "Parent Portal", f_parent_d: "Parents can view their child's details.",
+      footer: "Privacy Policy, Terms and data deletion pages coming in the next phase.",
+      err: "Please check the inputs.", result: "Result",
+      langBtn: "हिन्दी"
+    }
+  };
+
+  let lang = "hi";
+
+  function applyLanguage() {
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.dataset.i18n;
+      if (T[lang][key]) el.textContent = T[lang][key];
+    });
+    document.getElementById("langBtn").textContent = T[lang].langBtn;
+    renderDemo();
+    updateCalcs();
+  }
+
+  // ---------- Calculators ----------
+  const $ = id => document.getElementById(id);
+
+  function updatePercentage() {
+    const o = $("obtained").value, t = $("total").value;
+    $("pctResult").textContent = "";
+    $("pctError").textContent = "";
+    if (o === "" || t === "") return;
+    try {
+      $("pctResult").textContent = `${T[lang].result}: ${percentage(Number(o), Number(t))}%`;
+    } catch {
+      $("pctError").textContent = T[lang].err;
+    }
+  }
+
+  function updateAttendance() {
+    const p = $("present").value, l = $("late").value, d = $("totalDays").value;
+    $("attResult").textContent = "";
+    $("attError").textContent = "";
+    if (p === "" || l === "" || d === "") return;
+    try {
+      $("attResult").textContent = `${T[lang].result}: ${attendancePercentage(Number(p), Number(l), Number(d))}%`;
+    } catch {
+      $("attError").textContent = T[lang].err;
+    }
+  }
+
+  function updateCalcs() { updatePercentage(); updateAttendance(); }
+
+  // ---------- Demo table ----------
+  const DEMO = [
+    { id: "S001", name: "Aarav Sharma", cls: 10, marks: [88, 92, 79], paid: 400 },
+    { id: "S002", name: "Priya Verma", cls: 10, marks: [95, 91, 90], paid: 1200 },
+    { id: "S003", name: "Rohan Singh", cls: 9, marks: [60, 55, 58], paid: 400 },
+  ];
+
+  function renderDemo() {
+    const avgs = DEMO.map(d => d.marks.reduce((a, b) => a + b, 0) / d.marks.length);
+    const ranks = rankScores(avgs.map(a => Math.round(a)));
+    $("demoBody").innerHTML = DEMO.map((s, i) => {
+      const avgPct = percentage(Math.round(avgs[i]), 100);
+      const bal = feeBalance(1200, 0, s.paid);
+      return `<tr>
+        <td>${s.id}</td>
+        <td>${s.name} (demo)</td>
+        <td>${s.cls}</td>
+        <td>${avgPct}%</td>
+        <td>${grade(avgPct)}</td>
+        <td>${ranks[i]}</td>
+        <td>₹${bal}</td>
+      </tr>`;
+    }).join("");
+  }
+
+  // ---------- Events ----------
+  ["obtained", "total"].forEach(id => $(id).addEventListener("input", updatePercentage));
+  ["present", "late", "totalDays"].forEach(id => $(id).addEventListener("input", updateAttendance));
+
+  $("langBtn").addEventListener("click", () => {
+    lang = lang === "hi" ? "en" : "hi";
+    applyLanguage();
+  });
+
+  applyLanguage();
+</script>
+</body>
+</html>
